@@ -7,7 +7,8 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install the required packages
-RUN pip install -r requirements.txt  
+RUN pip install --upgrade pip 
+RUN pip install -r requirements.txt --root-user-action=ignore
 
 # Copy the rest of the application files to the container
 COPY . .   
