@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Link to go back to teachers directory page -->
+  <div class="container-input">
+    <a href="{% url 'teachers_directory' %}" class="btn-back">&lt;</a>
+
+    <h1>Import Data</h1>
+    
+    <!-- Form to upload CSV and ZIP files -->
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <!-- Label and input field for CSV file -->
+      <div class="form-group">
+        {{ form.csv_file.label_tag }}
+        {{ form.csv_file }}
+      </div>
+
+      <!-- Label and input field for ZIP file -->
+      <div class="form-group">
+        {{ form.zip_file.label_tag }}
+        {{ form.zip_file }}
+      </div>
+
+      <!-- Submit button to initiate data import -->
+      <button type="submit" class="btn-primary">Import</button>
+
+      <!-- Display errors related to CSV file upload -->
+      {% for error in form.csv_file.errors %}
+        <p class="error">{{ error }}</p>
+      {% endfor %}
+      <br>
+
+      <!-- Display errors related to ZIP file upload -->
+      {% for error in form.zip_file.errors %}
+        <p class="error">{{ error }}</p>
+      {% endfor %}
+
+    </form>
+  </div>
+{% endblock %}

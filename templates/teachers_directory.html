@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1> Teachers Directory </h1>
+  <div class="topbar-directory">
+
+    <!-- Search bar -->
+    <div class="search-container">
+      <input type="text" class="search-box" id="search-input" placeholder="Search...">
+    </div>
+
+    <!-- Import and sign out buttons for authenticated users -->
+    {% if request.user.is_authenticated %}
+      <div class="container-import">
+        <a href="{% url 'teachers_import' %}" class="btn-import">Import</a>
+      </div>
+      <div class="login-container">
+        <a href="{% url 'logout' %}" class="btn-login">Sign Out</a>
+      </div>
+      
+    <!-- Login button for non-authenticated users -->
+    {% else %}
+      <div class="login-container">
+        <a href="{% url 'login' %}" class="btn-login">Login</a>
+      </div>
+    {% endif %}
+  </div>
+    
+  <!-- Container for displaying teachers -->
+  <div id="teachers-container">
+    
+  </div>
+
+  <!-- Script for fetching and displaying teachers -->
+  <script src="{% static 'core/js/scripts.js' %}"></script>
+  <script>
+    // Fetch and display teachers on page load
+    getTeachers("{{ query }}", "{{ page.number }}")
+    // Get the search input
+    const searchInput = document.querySelector('#search-input');
+    // Add an input event listener to the search input field
+    searchInput.addEventListener('input', () => {
+      // Get the search query from the input field
+      const query = searchInput.value;
+      // Call the searchTeachers function with the search query and page 1
+      getTeachers(query, 1);
+    });
+  </script>
+{% endblock %}

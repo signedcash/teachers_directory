@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="signin-container">
+  <form method="post">
+    {% csrf_token %}
+    <!-- username field -->
+    <div class="form-group">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+    <!-- password field -->
+    <div class="form-group">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
+    <!-- non_field_errors for displaying errors not associated with a specific field -->
+    {% if form.non_field_errors %}
+      <div class="form-errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <!-- submit button -->
+    <button type="submit" class="btn btn-primary">Sign In</button>
+    <!-- link to register page -->
+    <p class="register-text">Don't have an account? <a href="{% url 'register' %}">Sign Up</a>.</p>
+  </form>
+</div>
+{% endblock %}

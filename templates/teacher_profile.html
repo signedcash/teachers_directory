@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-profile">
+  <a href="{% url 'teachers_directory' %}" class="btn-back">&lt;</a>
+  <div class="profile-details">
+    <!-- profile picture -->
+    {% if teacher.profile_picture %}
+    <img src="{{ teacher.profile_picture.url }}" alt="{{ teacher.first_name }} {{ teacher.last_name }}" class="profile-img">
+    {% else %}
+    <img src="{% static 'core/img/avatar.jpg' %}" alt="{{ teacher.first_name }} {{ teacher.last_name }}" class="profile-img">
+    {% endif %}
+
+    <!-- teacher name -->
+    <h1 class="profile-name">{{ teacher.first_name }} {{ teacher.last_name }}</h1>
+
+    <!-- teacher email -->
+    <p class="profile-email"><b>Email:</b> {{ teacher.email_address }}</p>
+
+    <!-- teacher phone number -->
+    <p class="profile-phone"><b>Phone:</b> {{ teacher.phone_number }}</p>
+
+    <!-- teacher room number -->
+    <p class="profile-room"><b>Room:</b> {{ teacher.room_number }}</p>
+
+    <!-- subjects taught -->
+    <p class="profile-subjects">Subjects Taught:</p>
+    <ul class="profile-subjects-list">
+      {% for subject in teacher.subjects_taught.all %}
+      <li style="padding-left: 15px">{{ subject.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

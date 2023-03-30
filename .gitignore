@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+.idea/
+.vscode/
+# PyCharm
+*.iml
+*.ipr
+*.iws
+venv
+
+# Pytest
+.pytest_cache/
+coverage/
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# Django
+*.log
+*.pot
+*.pyc
+local_settings.py
+
+# Ignore migrations folder in Django
+**/migrations/**
+**/__pycache__/**
+
+# Ignore media files
+media/
+
+# Ignore static files
+staticfiles/
+static/

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <!-- Sign-up form container -->
+  <div class="signin-container">
+    <form method="post">
+      {% csrf_token %}
+
+      <!-- Username field -->
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+
+      <!-- Displaying errors associated with the username field -->
+      {% for error in form.username.errors %}
+        <div class="form-errors">{{ error }}</div>
+      {% endfor %}
+
+      <!-- Password field 1 -->
+      <div class="form-group">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+      </div>
+
+      <!-- Displaying errors associated with the password field 1 -->
+      {% for error in form.password1.errors %}
+        <div class="form-errors">{{ error }}</div>
+      {% endfor %}
+
+      <!-- Password field 2 -->
+      <div class="form-group">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+      </div>
+
+      <!-- Displaying errors associated with the password field 2 -->
+      {% for error in form.password2.errors %}
+        <div class="form-errors">{{ error }}</div>
+      {% endfor %}
+
+      <!-- Submit button for sign-up form -->
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+
+      <!-- Link to the login page for already registered users -->
+      <p class="register-text">Already have an account? <a href="{% url 'login' %}">Sign In</a>.</p>
+    </form>
+  </div>
+{% endblock %}
