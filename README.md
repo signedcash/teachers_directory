@@ -14,3 +14,16 @@ This project is an online teacher directory. The project has the ability to view
 ```bash
 git clone https://github.com/username/teachers-directory.git
 ```
+2. Navigate to the project directory:
+
+```bash
+cd teachers-directory
+```
+3. Build and start the application:
+
+```bash
+docker-compose up
+```
+
+4. Open a web browser and go to http://localhost:8000 to view the application.
+
