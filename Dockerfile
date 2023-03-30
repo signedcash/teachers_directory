@@ -14,6 +14,7 @@ RUN pip install -r requirements.txt --root-user-action=ignore
 COPY . .   
 
 # Run the Django migrations
+RUN python manage.py makemigrations  
 RUN python manage.py migrate  
 
 # Start the Django development server
