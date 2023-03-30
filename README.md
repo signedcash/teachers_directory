@@ -12,7 +12,7 @@ This project is an online teacher directory. The project has the ability to view
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/username/teachers-directory.git
+git clone https://github.com/signedcash/teachers_directory.git
 ```
 2. Navigate to the project directory:
 
