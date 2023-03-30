@@ -17,7 +17,7 @@ git clone https://github.com/signedcash/teachers_directory.git
 2. Navigate to the project directory:
 
 ```bash
-cd teachers-directory
+cd teachers_directory
 ```
 3. Build and start the application:
 
