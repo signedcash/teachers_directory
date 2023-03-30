@@ -22,7 +22,7 @@ cd teachers_directory
 3. Build and start the application:
 
 ```bash
-docker-compose up
+sudo docker-compose up
 ```
 
 4. Open a web browser and go to http://localhost:8000 to view the application.
