@@ -24,7 +24,7 @@ class TeachersImportForm(forms.Form):
     Fields: 'csv_file' and 'zip_file'.
     """
     csv_file = forms.FileField(
-        label='Teacher Data (CSV)', 
+        label='Teacher Data (CSV)',
         validators=[
             FileExtensionValidator(allowed_extensions=['csv']),
             CSVFileValidator(),
@@ -32,10 +32,10 @@ class TeachersImportForm(forms.Form):
     )
 
     zip_file = forms.FileField(
-        label='Profile pictures (ZIP):', 
-        required=False, 
+        label='Profile pictures (ZIP):',
+        required=False,
         validators=[
-            FileExtensionValidator(allowed_extensions=['zip']), 
+            FileExtensionValidator(allowed_extensions=['zip']),
             ZipFileValidator(),
         ]
     )
