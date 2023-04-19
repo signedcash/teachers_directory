@@ -27,15 +27,21 @@
       <button type="submit" class="btn-primary">Import</button>
 
       <!-- Display errors related to CSV file upload -->
-      {% for error in form.csv_file.errors %}
-        <p class="error">{{ error }}</p>
-      {% endfor %}
-      <br>
+      {% if form.csv_file.errors %}
+        <p class="error">CSV file errors:</p>
+        {% for error in form.csv_file.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+        <br>
+      {% endif %}
 
       <!-- Display errors related to ZIP file upload -->
-      {% for error in form.zip_file.errors %}
-        <p class="error">{{ error }}</p>
-      {% endfor %}
+      {% if form.zip_file.errors %}
+        <p class="error">ZIP file errors:</p>
+        {% for error in form.zip_file.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      {% endif %}
 
     </form>
   </div>

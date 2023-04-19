@@ -3,9 +3,9 @@
 <!-- Container for teacher cards -->
 <div class="teachers-container">
   <!-- Loop through the teachers for the current page -->
-  {% for teacher in page %}
+  {% for teacher in page_obj %}
     <!-- Link to the teacher's profile -->
-    <a href="{{ teacher.id }}" class="link-profile">
+    <a href="{% url 'teacher_profile' teacher.id %}" class="link-profile">
       <!-- Teacher card -->
       <div class="teacher-card">
         <!-- Display profile picture, or a default avatar if one is not set -->
@@ -25,13 +25,13 @@
 </div>
 
 <!-- Pagination links -->
-{% if page.paginator.num_pages > 1 %}
+{% if page_obj.paginator.num_pages > 1 %}
   <div class="pagination">
     <!-- Loop through the pages and display links for the current page and the two previous and next pages -->
-    {% for p in page.paginator.page_range %}
-      {% if page.number == p %}
+    {% for p in page_obj.paginator.page_range %}
+      {% if page_obj.number == p %}
           <a class="active">{{ p }}</a>
-      {% elif p >= page.number|add:-2 and p <= page.number|add:2  %}
+      {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
           <a href="javascript:getTeachers('{{ query }}', '{{ p }}')">{{ p }}</a>
       {% endif %}
     {% endfor %}

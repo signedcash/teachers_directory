@@ -8,7 +8,7 @@ function getTeachers(query, page) {
   const xhr = new XMLHttpRequest();
 
   // Set the URL for the GET request
-  let url = `directory/list?page=${page}`
+  let url = `list/?page=${page}`
   if (query) {
       url += `&query=${query}`;
   }
@@ -21,6 +21,7 @@ function getTeachers(query, page) {
       // If the XMLHttpRequest status is 200 (OK), display the response
       if (xhr.status === 200) {
           const teachersList = document.getElementById('teachers-container');
+          console.log(xhr.responseText)
           teachersList.innerHTML = xhr.responseText;
       } else {
           console.log('Search error!');

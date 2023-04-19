@@ -36,7 +36,7 @@
   <script src="{% static 'core/js/scripts.js' %}"></script>
   <script>
     // Fetch and display teachers on page load
-    getTeachers("{{ query }}", "{{ page.number }}")
+    getTeachers("{{ query }}", "{{ current_page }}")
     // Get the search input
     const searchInput = document.querySelector('#search-input');
     // Add an input event listener to the search input field

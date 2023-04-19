@@ -3,9 +3,7 @@ from django.db import models
 
 
 class Subject(models.Model):
-    """
-    Subject model
-    """
+    """ Subject model. """
     name = models.CharField("Subject Name", max_length=100, unique=True)
 
     def __str__(self):
@@ -18,9 +16,7 @@ class Subject(models.Model):
 
 
 class Teacher(models.Model):
-    """
-    School teacher model.
-    """
+    """ School teacher model. """
     first_name = models.CharField("First Name", max_length=100)
     last_name = models.CharField("Last Name", max_length=100)
     profile_picture = models.ImageField("Profile Picture", upload_to='profile_pictures/', blank=True, null=True)

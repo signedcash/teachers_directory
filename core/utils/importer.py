@@ -1,5 +1,6 @@
-import pandas as pd
 import zipfile
+import pandas as pd
+
 from django.core.files import File
 from io import BytesIO
 from core.models import Subject, Teacher
@@ -14,28 +15,33 @@ def import_teachers_from_csv_and_zip(csv_data, zip_file):
         zip_file (InMemoryUploadedFile): Zip file with profile pictures.
     """
     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-        for index, row in csv_data.iterrows():
-            teacher = Teacher(
-                first_name=row['first_name'],
-                last_name=row['last_name'],
+        for _, row in csv_data.iterrows():
+            teacher, created = Teacher.objects.get_or_create(
                 email_address=row['email_address'],
-                phone_number=row['phone_number'],
-                room_number=row['room_number']
+                defaults={
+                    'first_name': row['first_name'],
+                    'last_name': row['last_name'],
+                    'phone_number': row['phone_number'],
+                    'room_number': row['room_number'],
+                }
             )
 
-            teacher.save()
+            if not created:
+                teacher.first_name = row['first_name']
+                teacher.last_name = row['last_name']
+                teacher.phone_number = row['phone_number']
+                teacher.room_number = row['room_number']
 
-
-            profile_picture_filename = row['profile_picture']
-            if profile_picture_filename:
+            if pd.isna(row['profile_picture']):
+                teacher.profile_picture = File(None)
+            else:
                 try:
-                    with zip_ref.open(profile_picture_filename) as img_file:
+                    with zip_ref.open(row['profile_picture']) as img_file:
                         image_data = BytesIO(img_file.read())
-                        teacher.profile_picture.save(profile_picture_filename, File(image_data))
+                        teacher.profile_picture.save(row['profile_picture'], File(image_data))
                 except KeyError:
                     pass
             
-
             subjects_list = row['subjects_taught'].split(",")
             for subject_name in subjects_list:
                 subject_name = subject_name.strip().title()
@@ -52,16 +58,25 @@ def import_teachers_from_csv(csv_data):
     Args:
         csv_data (DataFrame): Dataframe with teacher data.
     """
-    for index, row in csv_data.iterrows():
-        teacher = Teacher(
-            first_name=row['first_name'],
-            last_name=row['last_name'],
+    for _, row in csv_data.iterrows():
+        teacher, created = Teacher.objects.get_or_create(
             email_address=row['email_address'],
-            phone_number=row['phone_number'],
-            room_number=row['room_number']
+            defaults={
+                'first_name': row['first_name'],
+                'last_name': row['last_name'],
+                'phone_number': row['phone_number'],
+                'room_number': row['room_number'],
+            }
         )
 
-        teacher.save()
+        if not created:
+            teacher.first_name = row['first_name']
+            teacher.last_name = row['last_name']
+            teacher.phone_number = row['phone_number']
+            teacher.room_number = row['room_number']
+        
+        if pd.isna(row['profile_picture']):
+            teacher.profile_picture = File(None)
 
         subjects_list = row['subjects_taught'].split(",")
         for subject_name in subjects_list:
